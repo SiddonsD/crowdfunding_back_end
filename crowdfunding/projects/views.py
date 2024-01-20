@@ -84,7 +84,7 @@ class PledgeList(APIView):
             status=status.HTTP_400_BAD_REQUEST
         )
 
-# !!!! pledge supporter update permissions !!!! delete pledge option in views?#
+# !!!! pledge supporter update permissions !!!! #
 class PledgeDetail (APIView):
 
     permission_classes = [
