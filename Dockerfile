@@ -23,4 +23,4 @@ RUN chmod +x /code/run.sh
 EXPOSE 8000
 
 # replace demo.wsgi with <project_name>.wsgi
-CMD ["code/run.sh"]
+CMD ["/code/run.sh"]
