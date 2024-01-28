@@ -1,13 +1,9 @@
-from django.contrib.auth.models import AbstractUser
-from rest_framework import status
-from rest_framework.permissions import IsAuthenticated
+from rest_framework import status, permissions
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import CustomUser
 from .serializers import CustomUserSerializer, ChangePasswordSerializer
-
-
 
 class CustomUserRegister (APIView):
     
@@ -43,14 +39,15 @@ class CustomUserDetail (APIView):
         return Response(serializer.data)
     
 class ChangePasswordView(APIView):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticated,)
+    serializer_class = ChangePasswordSerializer
     
     def get_object(self):
         return self.request.user
     
-    def post(self, request, *args, **kwargs):
+    def put(self, request, *args, **kwargs):
         self.object = self.get_object()
-        serializer = ChangePasswordSerializer(data=request.data, context={'request': request})
+        serializer = self.get_serializer(data=request.data)
 
         if serializer.is_valid():
 # validate users existing password
