@@ -5,22 +5,25 @@ from rest_framework import status
 from .models import CustomUser
 from .serializers import CustomUserSerializer
 
-class CustomUserList (APIView):
-
-    def get(self, reqeust):
-        users = CustomUser.objects.all()
-        serializer = CustomUserSerializer(users, many=True)
-        return Response(serializer.data)
 
 class CustomUserRegister (APIView):
     
     def post(self, request):
         serializer = CustomUserSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
+            user = serializer.save()
+            response_data = serializer.data
+            response_data.pop('password', None)
+            return Response(response.data)
         
         return Response (serializer.errors)
+
+class CustomUserList (APIView):
+
+    def get(self, request):
+        users = CustomUser.objects.all()
+        serializer = CustomUserSerializer(users, many=True)
+        return Response(serializer.data)
 
 
 class CustomUserDetail (APIView):
