@@ -22,7 +22,7 @@ class CustomUserSerializer(serializers.ModelSerializer):
 # https://medium.com/django-rest/django-rest-framework-change-password-and-update-profile-1db0c144c0a3
     
 class ChangePasswordSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(write_only=True, required=True, validators=validate_password)
+    password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
     password2 = serializers.CharField(write_only=True, required=True)
     old_password = serializers.CharField(write_only=True, required=True)
 
@@ -46,3 +46,5 @@ class ChangePasswordSerializer(serializers.ModelSerializer):
 
         instance.set_password(validated_data['password'])
         instance.save()
+
+        return instance
