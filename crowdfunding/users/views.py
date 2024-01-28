@@ -13,7 +13,7 @@ class CustomUserRegister (APIView):
             user = serializer.save()
             response_data = serializer.data
             response_data.pop('password', None)
-            return Response(response.data)
+            return Response(Response.data)
         
         return Response (serializer.errors)
 
@@ -46,7 +46,6 @@ class ChangePasswordView(APIView):
         return self.request.user
     
     def put(self, request):
-        print('ChangePasswordView put method called')
         self.object = self.get_object()
         serializer = self.get_serializer(data=request.data)
 
