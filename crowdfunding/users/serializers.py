@@ -1,4 +1,4 @@
-from django.contrib.auth import password_validation
+from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
 from .models import CustomUser
 
@@ -22,7 +22,13 @@ class CustomUserSerializer(serializers.ModelSerializer):
 class ChangePasswordSerializer(serializers.Serializer):
     old_password = serializers.CharField(required=True)
     new_password = serializers.CharField(required=True)
+    confirm_new_password = serializers.CharField(required=True)
 
     def validate_new_password(self, value):
-        password_validation.validate_password(value, self.context['request'].user)
+        validate_password(value)
         return value
+    
+    def validate(self, data):
+        assert data ['new_password'] == data['confirm_new_password'], "Passwords do not match."
+        return data
+    

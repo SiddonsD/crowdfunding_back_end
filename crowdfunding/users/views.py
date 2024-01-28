@@ -40,17 +40,10 @@ class CustomUserDetail (APIView):
     
 class ChangePasswordView(APIView):
     permission_classes = (permissions.IsAuthenticated,)
-    serializer_class = ChangePasswordSerializer
     
-    def get_object(self):
-        return self.request.user
-    
-    def get_serializer(self, *args, **kwargs):
-        return self.serializer_class(*args, **kwargs)
-    
-    def put(self, request):
-        self.object = self.get_object()
-        serializer = self.get_serializer(data=request.data)
+    def put(self, request, *args, **kwargs):
+        user = self.request.user
+        serializer = ChangePasswordSerializer(data=request.data)
 
         if serializer.is_valid():
 # validate users existing password
@@ -58,8 +51,8 @@ class ChangePasswordView(APIView):
                 return Response ({"old_password": ["Password is incorrect."]}, status=status.HTTP_400_BAD_REQUEST)
             
 # if old password a match, user sets new password
-            self.object.set_password(serializer.data.get("new_password"))
-            self.object()
+            user.set_password(serializer.data.get("new_password"))
+            user.save()
             return Response({"success": "Your password has been successfully updated"}, status=status.HTTP_200_OK)
         
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
