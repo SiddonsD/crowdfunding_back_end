@@ -24,6 +24,9 @@ class ChangePasswordSerializer(serializers.Serializer):
     new_password = serializers.CharField(required=True)
     confirm_new_password = serializers.CharField(required=True)
 
+    def validate_old_password(self, value):
+        return value
+    
     def validate_new_password(self, value):
         validate_password(value)
         return value
@@ -31,4 +34,3 @@ class ChangePasswordSerializer(serializers.Serializer):
     def validate(self, data):
         assert data ['new_password'] == data['confirm_new_password'], "Passwords do not match."
         return data
-    
