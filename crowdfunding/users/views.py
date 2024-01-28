@@ -45,7 +45,7 @@ class ChangePasswordView(APIView):
     def get_object(self):
         return self.request.user
     
-    def put(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         self.object = self.get_object()
         serializer = self.get_serializer(data=request.data)
 
