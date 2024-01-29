@@ -53,7 +53,7 @@ class UpdateProfileSeralizer(serializers.ModelSerializer):
     email = serializers.EmailField(required=True)
 
     class Meta:
-        Model = CustomUser
+        model = CustomUser
         fields = ['id', 'username', 'first_name', 'last_name', 'email', 'password']
         extra_kwargs = {'password': {'read_only': True}}
 
