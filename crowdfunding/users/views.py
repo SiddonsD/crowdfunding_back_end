@@ -1,9 +1,10 @@
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from .models import CustomUser
-from .serializers import CustomUserSerializer
+from .serializers import CustomUserSerializer, UpdateUserSeralizer
 
 
 class CustomUserRegister (APIView):
@@ -38,4 +39,10 @@ class CustomUserDetail (APIView):
         user = self.get_object(pk)
         serializer = CustomUserSerializer(user)
         return Response(serializer.data)
+    
+class UpdateProfileView (APIView):
+
+    queryset = CustomUser.objects.all()
+    permission_classes = (IsAuthenticated,)
+    serializer_class = UpdateUserSeralizer
 
