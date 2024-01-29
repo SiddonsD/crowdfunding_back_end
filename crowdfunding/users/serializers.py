@@ -22,24 +22,24 @@ class CustomUserSerializer(serializers.ModelSerializer):
 # code source modified from https://medium.com/django-rest/django-rest-framework-change-password-and-update-profile-1db0c144c0a3
     
 class ChangePasswordSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
-    password2 = serializers.CharField(write_only=True, required=True)
-    old_password = serializers.CharField(write_only=True, required=True)
+    new_password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
+    new_password2 = serializers.CharField(write_only=True, required=True)
+    password = serializers.CharField(write_only=True, required=True)
 
     class Meta:
         model = CustomUser
-        fields = ('old_password', 'password', 'password2')
+        fields = ('password', 'new_password', 'new_password2')
 
     def validate(self, attrs):
-        if attrs['password'] != attrs['password2']:
+        if attrs['new_password'] != attrs['new_password2']:
             raise serializers.ValidationError({"password": "Password fields do not match."})
 
         return attrs
 
-    def validate_old_password(self, value):
+    def validate_password(self, value):
         user = self.context['request'].user
         if not user.check_password(value):
-            raise serializers.ValidationError({"old_password": "Old password is not correct"})
+            raise serializers.ValidationError({"password": "Existing password is not correct"})
         return value
 
     def update(self, instance, validated_data):
