@@ -49,7 +49,7 @@ class ChangePasswordSerializer(serializers.ModelSerializer):
 
         return instance
     
-class UpdateProfileSerializer(serializers.ModelSerializer):
+class UpdateProfileSerializering(serializers.ModelSerializer):
     email = serializers.EmailField(required=True)
 
     class Meta:
