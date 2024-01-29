@@ -48,19 +48,28 @@ class ChangePasswordView(generics.UpdateAPIView):
     permission_classes = (IsAuthenticated,)
     serializer_class = ChangePasswordSerializer
 
-#  delete old token and create new when password updated
+# update authenticated user password
     
     def perform_update(self, serializer):
         user=self.request.user
         serializer.save()
 
+#  delete old token and create new when password updated
         Token.objects.filter(user=user).delete()
         new_token = Token.objects.create(user=user)
-        return Response ({'token': new_token.key}, status=status.HTTP_200_OK)
+        super().perform_update(serializer)
 
+# not sure about override method here
+    def update(self, request, *args, **kwargs):
+        response = super().update(request, *args, **kwargs)
+        if response.status_code == status.HTTP_200_OK:
+            user = self.get_object()
+            token, created = Token.objects.get_or_create(user=user)
+            response.data['token'] = token.key
+        return response 
 
 class UpdateProfileView (UpdateAPIView):
 
     queryset = CustomUser.objects.all()
-    permission_classes = (IsAuthenticated)
+    permission_classes = (IsAuthenticated,)
     serializer_class = UpdateProfileSeralizer
