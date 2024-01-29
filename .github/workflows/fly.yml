@@ -2,7 +2,7 @@ name: Fly Deploy
 on:
   push:
     branches:
-    - pword_change
+    - main
 jobs:
   deploy:
     name: Deploy app
