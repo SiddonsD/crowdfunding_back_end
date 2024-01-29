@@ -15,7 +15,7 @@ class CustomUserRegister (APIView):
             user = serializer.save()
             response_data = serializer.data
             response_data.pop('password', None)
-            return Response(response.data)
+            return Response(response_data)
         
         return Response (serializer.errors)
 
