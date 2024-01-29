@@ -1,5 +1,6 @@
 from rest_framework import status, generics
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.authtoken.models import Token
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.generics import UpdateAPIView
@@ -43,9 +44,20 @@ class CustomUserDetail (APIView):
     
 class ChangePasswordView(generics.UpdateAPIView):
 
-        queryset = CustomUser.objects.all()
-        permission_classes = (IsAuthenticated,)
-        serializer_class = ChangePasswordSerializer
+    queryset = CustomUser.objects.all()
+    permission_classes = (IsAuthenticated,)
+    serializer_class = ChangePasswordSerializer
+
+#  delete old token and create new when password updated
+    
+    def perform_update(self, serializer):
+        user=self.request.user
+        serializer.save()
+
+        Token.objects.filter(user=user).delete()
+        new_token = Token.objects.create(user=user)
+        return Response ({'token': new_token.key}, status=status.HTTP_200_OK)
+
 
 class UpdateProfileView (UpdateAPIView):
 
