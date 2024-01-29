@@ -6,7 +6,7 @@ from rest_framework.views import APIView
 from rest_framework.generics import UpdateAPIView
 from rest_framework.response import Response
 from .models import CustomUser
-from .serializers import CustomUserSerializer, ChangePasswordSerializer, UpdateProfileSeralizer
+from .serializers import CustomUserSerializer, ChangePasswordSerializer, UpdateProfileSerializer
 
 
 class CustomUserRegister (APIView):
@@ -72,4 +72,4 @@ class UpdateProfileView (UpdateAPIView):
 
     queryset = CustomUser.objects.all()
     permission_classes = (IsAuthenticated,)
-    serializer_class = UpdateProfileSeralizer
+    serializer_class = UpdateProfileSerializer
