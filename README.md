@@ -70,5 +70,5 @@ AccessAid is for differently abled individuals who need accessibility support, p
 
 
 ## DB Schema
-![]
+This schema allows for the necessary relationships between users, projects, and pledges. A user can own multiple projects and make multiple pledges, while a project can have multiple pledges from multiple users.
 ( {{ ./relative/path/to/your/schema/image.png }} )
