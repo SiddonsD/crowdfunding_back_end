@@ -40,7 +40,29 @@ AccessAid is for differently abled individuals who need accessibility support, p
 {{ Fill out the table below to define your endpoints. An example of what this might look like is shown at the bottom of the page.It might look messy here in the PDF, but once it's rendered it looks very neat!It can be helpful to keep the markdown preview open in VS Code so that you cansee what you're typing more easily. }}
 | URL | HTTP Method | Response | Success Response Code | Authentication/Authorisation |
 | ------------------ | :-----------: | ---------------------- | :------------: | ---------------------------- |
-|                    |               |                        |                |                              |
+|/api-token-auth/|               |                        |                |                              |
+|/projects/|               |                        |                |                              |
+|/projects/|               |                        |                |                              |
+|/projects/<project_id>/|               |                        |                |                              |
+|/projects/<project_id>/|               |                        |                |                              |
+|/projects/<project_id>/|               |                        |                |                              |
+|/projects/?is_open=True/|               |                        |                |                              |
+|/projects/?order_by=date_created/|               |                        |                |                              |
+|/projects/?order_by=num_pledges/|               |                        |                |                              |
+|/projects/?order_by=recent_pledges/|               |                        |                |                              |
+|/projects/?order_by=target_raised/|               |                        |                |                              |
+|/users/|               |                        |                |                              |
+|/users/register/|               |                        |                |                              |
+|/users/login/|               |                        |                |                              |
+|/users/<user_id>/|GET|                        |                |                              |
+|/users/<user_id>/|DELETE|                        |                |                              |
+|/user/change_password/|               |                        |                |                              |
+|/user/update_profile/<user_id>/|               |                        |                |                              |
+|/pledges/|               |                        |                |                              |
+|/pledges/|               |                        |                |                              |
+|/pledges/<pledge_id>/|               |                        |                |                              |
+|/pledges/?order_by=date_created/|               |                        |                |                              |
+
 
 
 
