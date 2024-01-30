@@ -1,5 +1,5 @@
 # Crowdfunding Back End
- [**AccessAid**](https://crowdfunding-back-end-siddonsd.fly.dev/projects/)
+ Link to deployed project [**AccessAid**](https://crowdfunding-back-end-siddonsd.fly.dev/projects/)
 
 ## Project Requirements
 - [ ] Be separated into two distinct projects: an API built using the Django RestFramework and a website built using React.
@@ -71,6 +71,32 @@ AccessAid is for differently abled individuals who need accessibility support, p
 
 **404 Page**
 
+## Screenshots of Insomnia
+**GET Method**
+
+Returns a list of users
+![A screenshot in Insomnia demonstrating a successful GET method endpoint for crowdfunding app AccessAid](https://github.com/SiddonsD/crowdfunding_back_end/blob/main/crowdfunding_GET_users.PNG)
+
+Returns details of a specific user (must be logged in as authenticated user)
+![A screenshot in Insomnia demonstrating a successful GET method endpoint for crowdfunding app AccessAid](https://github.com/SiddonsD/crowdfunding_back_end/blob/main/crowdfunding_GET_user%20id.PNG)
+
+**POST Method**
+
+Create a new project
+![A screenshot in Insomnia demonstrating a successful POST method endpoint for crowdfunding app AccessAid](https://github.com/SiddonsD/crowdfunding_back_end/blob/main/crowdfunding_POST_create%20new%20user.PNG)
+
+**PUT Method**
+
+Change password (must be logged in as authenticated user)
+![A screenshot in Insomnia demonstrating a successful PUT method endpoint for crowdfunding app AccessAid](https://github.com/SiddonsD/crowdfunding_back_end/blob/main/crowdfunding_PUT_password%20change%20new%20token.PNG)
+
+Edit user profile (must be logged in as authenticated user)
+![A screenshot in Insomnia demonstrating a successful PUT method endpoint for crowdfunding app AccessAid](https://github.com/SiddonsD/crowdfunding_back_end/blob/main/crowdfunding_PUT_profile%20update.PNG)
+
+**Auth Token**
+
+Auth token returned with correct login credentials
+![A screenshot in Insomnia demonstrating a successful Auth Token issued for crowdfunding app AccessAid](https://github.com/SiddonsD/crowdfunding_back_end/blob/main/crowdfunding_POST_auth%20token.PNG)
 
 ## API Spec
 
