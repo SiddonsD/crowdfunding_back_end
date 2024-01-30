@@ -37,37 +37,34 @@ AccessAid is for differently abled individuals who need accessibility support, p
 
 
 ## API Spec
-{{ Fill out the table below to define your endpoints. An example of what this might look like is shown at the bottom of the page.It might look messy here in the PDF, but once it's rendered it looks very neat!It can be helpful to keep the markdown preview open in VS Code so that you cansee what you're typing more easily. }}
+
 | URL | HTTP Method | Response | Success Response Code | Authentication/Authorisation |
-| ------------------ | :-----------: | ---------------------- | :------------: | ---------------------------- |
-|/api-token-auth/|               |                        |                |                              |
-|/projects/|               |                        |                |                              |
-|/projects/|               |                        |                |                              |
-|/projects/<project_id>/|               |                        |                |                              |
-|/projects/<project_id>/|               |                        |                |                              |
-|/projects/<project_id>/|               |                        |                |                              |
-|/projects/?is_open=True/|               |                        |                |                              |
-|/projects/?order_by=date_created/|               |                        |                |                              |
-|/projects/?order_by=num_pledges/|               |                        |                |                              |
-|/projects/?order_by=recent_pledges/|               |                        |                |                              |
-|/projects/?order_by=target_raised/|               |                        |                |                              |
-|/users/|               |                        |                |                              |
-|/users/register/|               |                        |                |                              |
-|/users/login/|               |                        |                |                              |
-|/users/<user_id>/|GET|                        |                |                              |
-|/users/<user_id>/|DELETE|                        |                |                              |
-|/user/change_password/|               |                        |                |                              |
-|/user/update_profile/<user_id>/|               |                        |                |                              |
-|/pledges/|               |                        |                |                              |
-|/pledges/|               |                        |                |                              |
-|/pledges/<pledge_id>/|               |                        |                |                              |
-|/pledges/?order_by=date_created/|               |                        |                |                              |
+| ------------------ | :-----------: | ---------------------------------- | :------------: | ---------------------------- |
+|*/api-token-auth/*|**POST**|User object. Get auth token|**200**|None required|
+|*/projects/*|**GET**|Returns list of Project objects|**200**|None required|
+|*/projects/*|**POST**|Create a new Project entry|**200**|Must be logged in / auth_token required|
+|*/projects/<project_id>/*|**GET**|Returns Project detail page with id=<project_id>|**200**|None required|
+|*/projects/<project_id>/*|**PUT**|Edit Project with id=<project_id>|**200**|Must be logged in / auth_token required|
+|*/projects/<project_id>/*|**DELETE**|                        |                |                              |
+|*/projects/?is_open=True/*|**GET**|                        |                |                              |
+|*/projects/?order_by=date_created/*|**GET**|                        |                |                              |
+|*/projects/?order_by=num_pledges/*|**GET**|                        |                |                              |
+|*/projects/?order_by=recent_pledges/*|**GET**|                        |                |                              |
+|*/projects/?order_by=target_raised/*|**GET**|                        |                |                              |
+|*/users/*|**GET**|                        |                |                              |
+|*/users/register/*|**POST**|                        |                |                              |
+|*/users/login/*|**POST**|                        |                |                              |
+|*/users/<user_id>/*|**GET**|                        |                |                              |
+|*/users/<user_id>/*|**DELETE**|                        |                |                              |
+|*/user/change_password/*|**PUT**|                        |                |                              |
+|*/user/update_profile/<user_id>/*|**PUT**|                        |                |                              |
+|*/pledges/*|**GET**|                        |                |                              |
+|*/pledges/*|**POST**|                        |                |                              |
+|*/pledges/<pledge_id>/*|**GET**|                        |                |                              |
+|*/pledges/?order_by=date_created/*|**POST**|                        |                |                              |
 
 
 
-
-
-An example API spec:
 
 ## DB Schema
 ![]
