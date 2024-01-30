@@ -71,5 +71,6 @@ AccessAid is for differently abled individuals who need accessibility support, p
 
 ## DB Schema
 This schema allows for the necessary relationships between users, projects, and pledges. A user can own multiple projects and make multiple pledges, while a project can have multiple pledges from multiple users. Enlarged view can be accessed [here](https://www.figma.com/file/ixyPlzL5NSfiXpVVdhlip8/AccessAid?type=design&node-id=0%3A1&mode=design&t=xwNWgAwTFYjunzpd-1).
-![A database diagram showing relationship between users, projects and pledges for crowdfunding app AccessAid]
-<img src='./blob/main/AccessAid.png'>
+![A database diagram showing relationship between users, projects and pledges for crowdfunding app AccessAid](https://www.figma.com/file/ixyPlzL5NSfiXpVVdhlip8/AccessAid?type=design&node-id=0%3A1&mode=design&t=xwNWgAwTFYjunzpd-1)
+
+
