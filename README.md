@@ -71,7 +71,7 @@ AccessAid is for differently abled individuals who need accessibility support, p
 
 **404 Page**
 
-## Screenshots of Insomnia
+## Screenshots of API tests
 **GET Method**
 
 Returns a list of users
@@ -97,6 +97,9 @@ Edit user profile (must be logged in as authenticated user)
 
 Auth token returned with correct login credentials
 ![A screenshot in Insomnia demonstrating a successful Auth Token issued for crowdfunding app AccessAid](https://github.com/SiddonsD/crowdfunding_back_end/blob/main/crowdfunding_POST_auth%20token.PNG)
+
+## How to test API in Insomnia
+Download [**Insomnia**](https://insomnia.rest/download)
 
 ## API Spec
 
