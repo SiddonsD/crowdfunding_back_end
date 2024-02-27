@@ -15,12 +15,14 @@ class CustomUserRegister (APIView):
         serializer = CustomUserSerializer(data=request.data)
         if serializer.is_valid():
             user = serializer.save()
+            # token for new user
+            token, created = Token.objects.get_or_create(user=user)
             response_data = serializer.data
             response_data.pop('password', None)
             response_data['token'] = token.key
-            return Response(response_data)
+            return Response(response_data, status=status.HTTP_201_CREATED)
         
-        return Response (serializer.errors)
+        return Response (serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class CustomUserList (APIView):
 
