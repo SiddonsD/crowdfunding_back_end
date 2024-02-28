@@ -13,7 +13,10 @@ class ProjectList (APIView):
         projects = Project.objects.all()
         serializer = ProjectSerializer(projects, many=True)
         return Response(serializer.data)
-    
+
+class ProjectCreate (APIView):
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
     def post(self, request):
         serializer = ProjectSerializer(data=request.data)
         if serializer.is_valid():
