@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.apps import apps
-# from .models import Project, Pledge
+from .models import Project, Pledge
 
 class PledgeSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='supporter.id')
