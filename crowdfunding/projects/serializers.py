@@ -1,15 +1,14 @@
 from rest_framework import serializers
 from django.apps import apps
 from .models import Project, Pledge
+from users.serializers import CustomUserSerializer
 
 class PledgeSerializer(serializers.ModelSerializer):
-    owner = serializers.ReadOnlyField(source='supporter.id')
+    supporter_detail = CustomUserSerializer(source='supporter', read_only=True)
     
     class Meta:
         model = apps.get_model('projects.Pledge')
         fields = '__all__'
-
-# !!!! pledge supporter update permissions !!!! delete pledge option in views?#
         
 class PledgeDetailSerializer(PledgeSerializer):
     pledges = PledgeSerializer(many=True, read_only=True)
