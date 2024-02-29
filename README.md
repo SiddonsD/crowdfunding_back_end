@@ -107,7 +107,7 @@ Download [**Insomnia**](https://insomnia.rest/download)
 | ------------------ | :-----------: | ---------------------------------- | :------------: | ---------------------------- |
 |*/api-token-auth/*|**POST**|User object. Get auth token|**200**|None required|
 |*/projects/*|**GET**|Returns list of Project objects|**200**|None required|
-|*/projects/*|**POST**|Create a new Project entry|**201**|Must be logged in / auth_token required|
+|*/projects/create*|**POST**|Create a new Project entry|**201**|Must be logged in / auth_token required|
 |*/projects/<project_id>/*|**GET**|Returns Project detail page with id=<project_id>|**200**|None required|
 |*/projects/<project_id>/*|**PUT**|Edit Project with id=<project_id>|**200**|Must be logged in / auth_token required|
 |*/projects/<project_id>/*|**DELETE**|Delete Project with id=<project_id>|**200**|Must be logged in / auth_token required|
