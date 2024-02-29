@@ -19,7 +19,7 @@ class Pledge(models.Model):
     amount = models.IntegerField()
     comment = models.CharField(max_length=200)
     anonymous = models.BooleanField()
-    date_created = models.DateTimeField(default=timezone.now)
+    date_created = models.DateTimeField(auto_now_add=True)
     project = models.ForeignKey(
         'Project',
         on_delete=models.CASCADE,
