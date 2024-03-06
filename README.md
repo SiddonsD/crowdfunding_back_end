@@ -119,7 +119,7 @@ Download [**Insomnia**](https://insomnia.rest/download)
 |*/users/*|**GET**|Returns list of Users objects|**200**|None required|
 |*/users/register/*|**POST**|Create new user|**201**|None required|
 |*/users/login/*|**POST**|Login as User id=<user_id>, returns a token|**201**|None required|
-|*/users/<user_id>/*|**GET**|Return User detail page with id=<user_id>|**200**|Must be logged in as User id=<user_id> / auth_token required|
+|*/user/<user_id>/*|**GET**|Return User detail page with id=<user_id>|**200**|Must be logged in as User id=<user_id> / auth_token required|
 |*/users/<user_id>/*|**DELETE**|Delete User with id=<user_id>|**200**|Must be logged in as User id=<user_id> / auth_token required|
 |*/user/change_password/*|**PUT**|Change User password with id=<user_id>|**200**|Must be logged in as User id=<user_id> / auth_token required. On update, old auth_token deleted, new auth_token issued|
 |*/user/update_profile/<user_id>/*|**PUT**| Update User detail with id=<user_id>|**200**|Must be logged in as User id=<user_id> / auth_token required|
