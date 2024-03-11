@@ -32,9 +32,16 @@ class ProjectSerializer(serializers.ModelSerializer):
 
         fields = '__all__'
 
-# sets constraints on campaign duration for user selected date
+# sets constraints on campaign duration for user selected dates
+    def validate_start_date(self, value):
+        if value < timezone.now():
+            raise serializers.ValidationError("The start date cannot be in the past.")
+        elif value > timezone.now() + timedelta(days=45):
+            raise serializers.ValidationError("The start date must be within 45 days from now.")
+        return value
+    
     def validate_end_date(self, value):
-        if value <= timezone.now():
+        if value < timezone.now():
             raise serializers.ValidationError("The end date must be in the future.")
         elif value > timezone.now() + timedelta(days=90):
             raise serializers.ValidationError("The end date must be within 90 days from now.")
@@ -55,7 +62,7 @@ class ProjectDetailSerializer(ProjectSerializer):
         instance.goal = validated_data.get('goal', instance.goal)
         instance.image = validated_data.get('image', instance.image)
         instance.is_open = validated_data.get('is_open', instance.is_open)
-        instance.date_created = validated_data.get('date_created', instance.date_created)
+        instance.start_date = validated_data.get('start_date', instance.start_date)
         instance.end_date = validated_data.get('end_date', instance.end_date)
         instance.owner = validated_data.get('owner', instance.owner)
         instance.save()

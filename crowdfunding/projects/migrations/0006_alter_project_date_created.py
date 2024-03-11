@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterField(
             model_name='project',
-            name='date_created',
-            field=models.DateTimeField(default=projects.models.default_date_created),
+            name='start_date',
+            field=models.DateTimeField(default=projects.models.default_start_date),
         ),
     ]
