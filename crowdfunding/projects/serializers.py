@@ -43,7 +43,7 @@ class ProjectSerializer(serializers.ModelSerializer):
     def create (self, validated_data):
         if 'end_date' not in validated_data:
             validated_data['end_date'] = default_end_date()
-        project = Project(**validated_data)
+        project = Project.objects.create(**validated_data)
         return project
         
 class ProjectDetailSerializer(ProjectSerializer):
