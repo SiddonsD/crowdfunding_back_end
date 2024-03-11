@@ -32,7 +32,7 @@ class ProjectSerializer(serializers.ModelSerializer):
 
         fields = '__all__'
 
-# sets constraints on campaign duration for user selected dates
+# sets constraints on campaign duration for user selected date 
     def validate_start_date(self, value):
         if value < timezone.now():
             raise serializers.ValidationError("The start date cannot be in the past.")
