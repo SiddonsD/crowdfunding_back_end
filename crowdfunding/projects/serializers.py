@@ -48,8 +48,9 @@ class ProjectSerializer(serializers.ModelSerializer):
         return value
     
     def create (self, validated_data):
+        start_date = validated_data.get('start_date', timezone.now())
         if 'end_date' not in validated_data:
-            validated_data['end_date'] = default_end_date()
+            validated_data['end_date'] = default_end_date(start_date)
         project = Project.objects.create(**validated_data)
         return project
         
