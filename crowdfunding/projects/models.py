@@ -3,6 +3,9 @@ from django.contrib.auth import get_user_model
 from django.utils import timezone
 from datetime import timedelta
 
+def default_date_created():
+    return timezone.now()
+
 def default_end_date():
     return timezone.now() + timedelta(days=45)
 
@@ -12,7 +15,7 @@ class Project (models.Model):
     goal = models.IntegerField()
     image = models.URLField()
     is_open = models.BooleanField()
-    date_created = models.DateTimeField()
+    date_created = models.DateTimeField(default=default_date_created)
     end_date = models.DateTimeField(default=default_end_date)
     owner = models.ForeignKey(
         get_user_model(),
