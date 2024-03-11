@@ -1,6 +1,8 @@
 from rest_framework import serializers
 from django.apps import apps
-from .models import Project, Pledge
+from django.utils import timezone
+from datetime import timedelta
+from .models import Project, Pledge, default_end_date
 from users.serializers import CustomUserSerializer
 
 class PledgeSerializer(serializers.ModelSerializer):
@@ -37,6 +39,12 @@ class ProjectSerializer(serializers.ModelSerializer):
         elif value > timezone.now() + timedelta(days=90):
             raise serializers.ValidationError("The end date must be within 90 days from now.")
         return value
+    
+    def create (self, validated_data):
+        if 'end_date' not in validated_data:
+            validated_data['end_date'] = default_end_date()
+        project = Project(**validated_data)
+        return project
         
 class ProjectDetailSerializer(ProjectSerializer):
     pledges = PledgeSerializer(many=True, read_only=True)
