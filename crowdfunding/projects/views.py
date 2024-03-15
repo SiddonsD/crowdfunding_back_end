@@ -1,5 +1,6 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework import generics
 from .models import Project, Pledge
 from .serializers import ProjectSerializer, PledgeSerializer, ProjectDetailSerializer, PledgeDetailSerializer
 from django.http import Http404
@@ -30,8 +31,9 @@ class ProjectCreate (APIView):
             status=status.HTTP_400_BAD_REQUEST
         )
 
-class ProjectDetail (APIView):
-
+class ProjectDetail (generics.RetrieveUpdateDestroyAPIView):
+    queryset = Project.objects.all()
+    serializer_class = ProjectDetailSerializer
     permission_classes = [
         permissions.IsAuthenticatedOrReadOnly,
         IsOwnerOrReadOnly
@@ -69,6 +71,12 @@ class ProjectDetail (APIView):
               serializer.errors,
               status=status.HTTP_400_BAD_REQUEST
          )
+    
+    def perform_update(self, serializer):
+        serializer.save(owner=self.request.user)
+    
+    def perform_destroy(self, instance):
+        instance.delete()
 
 class PledgeList(APIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
@@ -91,9 +99,8 @@ class PledgeList(APIView):
             status=status.HTTP_400_BAD_REQUEST
         )
 
-# !!!! pledge supporter update permissions !!!! #
+# !!!! convert to RetrieveUpdateDestroyAPIView for consistencey with project detail !!!! #
 class PledgeDetail (APIView):
-
     permission_classes = [
         permissions.IsAuthenticatedOrReadOnly,
         IsOwnerOrReadOnly
