@@ -9,3 +9,7 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.username
+    
+    def delete (self, *args, **kwargs):
+        print (f"User {self.username} is about to be deleted.")
+        super().delete(*args, **kwargs)
