@@ -62,6 +62,15 @@ class CustomUserDetail (APIView):
         serializer = CustomUserSerializer(user)
         return Response(serializer.data)
     
+    def delete(self, request, pk):
+        try:
+            user=self.request.user
+            user.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        except CustomUser.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+    
 class ChangePasswordView(generics.UpdateAPIView):
 
     queryset = CustomUser.objects.all()
@@ -92,13 +101,3 @@ class UpdateProfileView (UpdateAPIView):
     queryset = CustomUser.objects.all()
     permission_classes = (IsAuthenticated,)
     serializer_class = UpdateProfileSerializer
-
-
-class DeleteProfileView (UpdateAPIView):
-    queryset = CustomUser.objects.all()
-    permission_classes = (IsAuthenticated,)
-
-    def delete(self, request):
-        user=self.request.user
-        user.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
