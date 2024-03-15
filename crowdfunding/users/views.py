@@ -9,9 +9,7 @@ from rest_framework.response import Response
 from .models import CustomUser
 from .serializers import CustomUserSerializer, ChangePasswordSerializer, UpdateProfileSerializer
 
-
 class CustomUserRegister (APIView):
-    
     def post(self, request):
         serializer = CustomUserSerializer(data=request.data)
         if serializer.is_valid():
@@ -26,7 +24,6 @@ class CustomUserRegister (APIView):
         return Response (serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 class CustomAuthToken(ObtainAuthToken):
-
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data, context={'request': request})
         serializer.is_valid(raise_exception=True)
@@ -42,15 +39,12 @@ class CustomAuthToken(ObtainAuthToken):
         })
 
 class CustomUserList (APIView):
-
     def get(self, request):
         users = CustomUser.objects.all()
         serializer = CustomUserSerializer(users, many=True)
         return Response(serializer.data)
 
-
 class CustomUserDetail (APIView):
-
     def get_object(self, pk):
         try:
             return CustomUser.objects.get(pk=pk)
@@ -63,28 +57,27 @@ class CustomUserDetail (APIView):
         return Response(serializer.data)
     
 class ChangePasswordView(generics.UpdateAPIView):
-
     queryset = CustomUser.objects.all()
     permission_classes = (IsAuthenticated,)
     serializer_class = ChangePasswordSerializer
 
+    def get_object(self):
+        return self.request.user
+
 # update authenticated user password
     
     def perform_update(self, serializer):
-        user=self.request.user
+        user=self.get_object()
         serializer.save()
 
-#  delete old token and create new when password updated
+# delete old token and create new when password updated
         Token.objects.filter(user=user).delete()
         new_token = Token.objects.create(user=user)
-        super().perform_update(serializer)
 
-# not sure about override method here
     def update(self, request, *args, **kwargs):
         response = super().update(request, *args, **kwargs)
         if response.status_code == status.HTTP_200_OK:
-            user = self.get_object()
-            token, created = Token.objects.get_or_create(user=user)
+            token, created = Token.objects.get_or_create(user=self.get_object())
             response.data['token'] = token.key
         return response 
 
@@ -92,6 +85,12 @@ class UpdateProfileView (UpdateAPIView):
     queryset = CustomUser.objects.all()
     permission_classes = (IsAuthenticated,)
     serializer_class = UpdateProfileSerializer
+
+    def get_object(self):
+        return self.request.user
+    
+    def update (self, request, *args, **kwargs):
+        return super().update(request, *args, **kwargs)
 
 class DeleteProfileView (APIView):
     permission_classes = (IsAuthenticated,)
