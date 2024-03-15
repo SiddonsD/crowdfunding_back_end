@@ -89,7 +89,16 @@ class ChangePasswordView(generics.UpdateAPIView):
         return response 
 
 class UpdateProfileView (UpdateAPIView):
-
     queryset = CustomUser.objects.all()
     permission_classes = (IsAuthenticated,)
     serializer_class = UpdateProfileSerializer
+
+
+class DeleteProfileView (UpdateAPIView):
+    queryset = CustomUser.objects.all()
+    permission_classes = (IsAuthenticated,)
+
+    def delete(self, request):
+        user=self.request.user
+        user.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
